@@ -1,15 +1,20 @@
 import express from "express";
 import morgan from "morgan";
-
-const app = express();
+import path from "path";
 
 import tourRouter from "./routes/tourRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 
+const app = express();
+const __dirname = path.resolve();
+
 // 1) MIDDLEWARES
 // use middlewares (conseguir o body do request)
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
   console.log("Hello from the middleware🥋");
