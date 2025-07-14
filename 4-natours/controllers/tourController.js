@@ -91,6 +91,7 @@ export const createTour = async (req, res) => {
 
 export const updateTour = async (req, res) => {
   try {
+    // Run Validators: True -> faz com que toda vez que fizer o update ele roda as validações necessárias
     const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
